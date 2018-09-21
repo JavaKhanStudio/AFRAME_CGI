@@ -124,12 +124,12 @@
             "name" : "chest_mat",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
+                    0.0,
                     0.800000011920929,
-                    0.800000011920929,
-                    0.800000011920929,
+                    0.0,
                     1.0
                 ],
-                "metallicFactor" : 0.0
+                "metallicFactor" : 1.0
             }
         }
     ],
