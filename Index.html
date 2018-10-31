@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Textures - A-Frame School</title>
+    <meta name="description" content="Textures - A-Frame School" />
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://wizgrav.github.io/aframe-effects/dist/aframe-effects.js"></script>
+    
+    <script type="script-effect" id="blendOutline" data-diffuse="">
+    void $main(inout vec4 c, vec4 o, vec2 uv, float d){
+        c.rgb = mix(c.rgb, o.rgb, smoothstep(0.1,0.3,o.a));
+    }</script>
+    <script type="script-effect" id="add" data-defaults="bloom_texture bloom_intensity" data-diffuse="">
+    void $main(inout vec4 c, vec4 o, vec2 uv, float d){
+        c.rgb += pow(texture2D($0, uv).rgb,vec3(2.)) * $1;
+    }</script>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%7CRoboto+Mono" media="all" /></head>
+  <body class="a-body ">
+    <a-scene antialias="false" effects=" colors, outline.sobel?, #blendOutline, bloom, film,  godrays, glitch,  fxaa" film="sIntensity: 0.03; nIntensity: 0.2" outline="enabled: false; width: 1.33 1.33; range: 0 10; strength: 3; smooth: true;" colors="mode:hqprtom; mul: 0.66 0.5 0.66; pow: 1 1.33 1.66; quant: 0.3 0.3 0.1; orig: 0.33 0.66 0.66" bloom="filter: bloom!, bloom.filter, #customFilter(bloom_texture 0.3 0.6 0.5); strength: 0.5; radius:1.2" fxaa="true" godrays="src: #sun; threshold: 0. 0.33; intensity: 2" glitch="false" class="fullscreen" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="">
+      
+      <canvas class="a-canvas" data-aframe-canvas="true" width="375" height="187"></canvas>
+     <a-sky src="https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2014/09/Venice.Still001.jpeg" radius="30" material="" geometry=""></a-sky>
+
+      <a-assets>
+        <a-asset-item id="test" src="https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/chest.gltf"></a-asset-item>
+        <a-asset-item id="test_2" src="https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/treasure_chest.obj"></a-asset-item>
+        <a-asset-item id="test_3" src="https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Wolf_One_dae.dae"></a-asset-item>
+      </a-assets>
+     
+     <!--
+      <a-gltf-model src="#test" position="4 7 -4" gltf-model="https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/chest.gltf" material="src:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_DIFF.png;normalMap:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_NRM.png"></a-gltf-model>
+    -->
+      
+      <a-obj-model src="#test_2" scale="0.03 0.03 0.03" position="0 0 -4" material="src:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_DIFF.png;normalMap:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_NRM.png" obj-model="" visible=""></a-obj-model>
+      <a-obj-model src="#test_2" scale="0.03 0.03 0.03" position="4 0 -4" material="src:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_DIFF.png;normalMap:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_NRM.png" obj-model="" visible="" light="castShadow:true;color:#EF2D5E;shadowBias:0.01;type:point;shadowMapWidth:1024;shadowMapHeight:1024"></a-obj-model>
+      <a-collada-model src="#test_3" scale="10 10 10" position="-4 0 -4" material="src:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_DIFF.png;normalMap:https://rawgit.com/JavaKhanStudio/AFRAME_CGI/master/Treasurechest_NRM.png" obj-model="" visible=""></a-collada-model>
+
+      
+      
+      <a-light type="ambient" color="#445451" light=""></a-light>
+      <a-light type="point" intensity="2" position="2 4 4" light=""></a-light>
+    </a-scene>
+    
+    <div style="position:fixed; top:0; left:0; width: 100%; z-index:1000; text-align: center">
+      <label style="font-weight: bold; color: white; text-shadow: 1px 1px black; cursor: pointer;">
+          <input type="checkbox" checked="" style="vertical-align: bottom;" onchange="document.querySelector('a-scene').setAttribute('effects', this.checked ? 'colors, outline.sobel?, #blendOutline, bloom, film,  godrays, glitch,  fxaa' : ''  )">
+          Toggle effects
+      </label>
+      <label style="font-weight: bold; color: white; text-shadow: 1px 1px black; cursor: pointer;">
+          <input type="checkbox" style="vertical-align: bottom;" onchange="document.querySelector('a-scene').setAttribute('glitch', this.checked  )">
+          Glitch
+      </label>
+      <label style="font-weight: bold; color: white; text-shadow: 1px 1px black; cursor: pointer;">
+          <input type="checkbox" checked="" style="vertical-align: bottom;" onchange="document.querySelector('a-scene').setAttribute('fxaa', this.checked  )">
+          FXAA
+      </label>
+    </div>
+</body></html>
